@@ -75,3 +75,47 @@ Tata Motors, a leader in the automotive sector, operates within a complex supply
   - Demand predictions  
   - Recommendations  
 
+----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+## 🚀 Key Results  
+
+| Model         | RMSE   | MAE   | R²    |
+|---------------|--------|-------|-------|
+| XGBoost       | 156.49 | 14.45 | 0.84  |
+| SARIMA        | 87.57  | 8.32  | 0.96  |
+| Holt-Winters  | 129.82 | 14.71 | 0.89  |
+
+✅ **SARIMA achieved the best accuracy for 3-month forecasts.**  
+
+📦 Effective segmentation enables **targeted inventory control** for each product type.  
+
+📊 Dashboard provides **actionable insights** for procurement and inventory managers.  
+
+----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+## 📂 How to Use  
+- Clone the repo and review the folders: **`final_report/`**, **`notebooks/`**, **`scripts/`**, and **`model_code/`** for complete end-to-end context.  
+- See architecture diagrams in **`images/architecture/`**.  
+- Jupyter notebooks and scripts are **modular and well-commented**.  
+- Forecast model outputs are available in **`model_outputs/`**.  
+
+---
+
+## 📚 References  
+- Includes 15+ key journal and industry sources; full details are provided in the final report.  
+- Notable: *Soni et al., "Inventory Forecasting Model Using Genetic Programming and Holt-Winter's Exponential Smoothing Method"* (IEEE, 2017).  
+
+---
+
+## 🙏 Acknowledgements  
+- Project completed as part of the **Master of Science in Business Analytics** program, REVA University.  
+- Guidance: **Dr. Jay Bharatheesh Simha**.  
+- Industry support from **Tata Motors dealership stakeholders**.  
+
+---
+
+## 📝 License  
+This project is submitted for **academic and research purposes**.  
+All rights reserved by the author and institution.  
+
+📌 For detailed process, results, and code, review the attached files and documentation in each folder/path.  
+
+
