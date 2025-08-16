@@ -1,22 +1,77 @@
-Inventory Forecasting and Analytics for Tata Motors – Case Study (Dealership)
+# Inventory Forecasting and Analytics for Tata Motors – Case Study (Dealership)
+
+<small>
 This repository contains the complete project for Inventory Forecasting and Analytics for Tata Motors Company – A Case Study for One Dealership, as part of the Capstone Project requirements for REVA Academy for Corporate Excellence (RACE).
+
 ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 ## **📄 Project Overview**
 
+<small>
 Tata Motors, a leader in the automotive sector, operates within a complex supply chain with varied demand patterns and inventory challenges. This project leverages advanced analytics and machine learning to optimize spare parts forecasting for a dealership, aiming to minimize costs, avoid stockouts/excess inventory, and enhance customer satisfaction.
+</small>
+
 ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
 ## **🎯 Objectives**
 
-Build an inventory analytics ETL and dimensional data model
+1. Build an inventory analytics ETL and dimensional data model
 
-Automate data ingestion and movement using Azure Data Factory
+2. Automate data ingestion and movement using Azure Data Factory
 
-Develop dashboards for historic and predictive analytics using Streamlit
+3. Develop dashboards for historic and predictive analytics using Streamlit
 
-Create robust demand forecasting models for spare parts (next 2-3 months)
+4. Create robust demand forecasting models for spare parts (next 2-3 months)
 
-Recommend actionable insights to business stakeholders
+5. Recommend actionable insights to business stakeholders
 
-Calculate and report cost savings from best-fit models across inventory segments
+6. Calculate and report cost savings from best-fit models across inventory segments
+
+----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+## **🏗️ Project Structure**
+
+| Folder / File                                      | Description                                                        |
+|----------------------------------------------------|--------------------------------------------------------------------|
+| `data/`                                            | Contains preprocessed and raw datasets (CSV, Excel)                |
+|`preprocessed_data/`                                | Contains the segmented data and pivot data
+| `notebooks/`                                       | Jupyter/DB notebooks for analysis, EDA, and modeling            |
+| `scripts/`                                         | SQL scripts for Snowflake warehousing layers             |
+| `images/architecture/`                             | Project architecture and flow diagrams                             |
+| `final_report/BA11_Capstone1-Project-Final-Report.docx` | Final project report with background, methodology, and results |
+| `proposal/BA_Capstone-Project-Proposal.docx`       | Project proposal document                                          |
+| `ppt/BA11_Capstone1-Project_Final-PPT.pptx`        | Final capstone presentation                                        |
+| `model_code/Final_Model.html`                      | Main Python model implementation for forecasting                   |
+| `model_outputs/performance_metric.csv`             | Output metrics (RMSE, MAE, R²) of all forecasting models           |
+| `README.md`                                        | This file                                                          |
+
+----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+## ⚙️ Technical Workflow  
+
+### 📥 Data Collection & Ingestion  
+- Transactional data collected (**2022-01 to 2024-08**) from Tata Motors dealership.  
+- Ingestion via **Azure Data Factory** to **Snowflake Cloud DWH** (see architecture diagrams).  
+
+### 🗄️ Data Warehousing & Modeling  
+- Multi-layered architecture: *Landing → Cleansed → History → Core → Presentation*.  
+- **Star schema** with fact and dimension tables for KPIs, parts, dealer, time, and others.  
+
+### 📊 Segmentation  
+- **ABC Analysis** → Based on inventory value contribution.  
+- **XYZ Classification** → Based on demand variability (*Coefficient of Variation*).  
+- **FSN Classification** → Based on frequency of sales/movement.  
+
+### 🤖 Machine Learning Models  
+- Data segmented into **AFX, AFY, AFZ, BFX**, etc. (combining ABC, XYZ, FSN).  
+- Forecasting models implemented:  
+  - XGBoost Regression  
+  - SARIMA / Auto ARIMA  
+  - Holt-Winters Exponential Smoothing  
+- **Model evaluation metrics**: MAPE, RMSE, MAE, R².  
+
+### 📈 Visualization & Dashboards  
+- **Streamlit Dashboard** for:  
+  - Historic trends  
+  - Inventory health  
+  - Demand predictions  
+  - Recommendations  
 
