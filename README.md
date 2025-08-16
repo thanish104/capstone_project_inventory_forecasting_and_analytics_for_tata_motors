@@ -19,3 +19,4 @@ Create robust demand forecasting models for spare parts (next 2-3 months)
 Recommend actionable insights to business stakeholders
 
 Calculate and report cost savings from best-fit models across inventory segments
+
