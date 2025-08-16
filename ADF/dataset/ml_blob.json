@@ -1,0 +1,43 @@
+{
+	"name": "ml_blob",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "AzureBlobStorage",
+			"type": "LinkedServiceReference"
+		},
+		"annotations": [],
+		"type": "DelimitedText",
+		"typeProperties": {
+			"location": {
+				"type": "AzureBlobStorageLocation",
+				"fileName": "forecast_combined.csv",
+				"folderPath": "Forecasted_ouput",
+				"container": "inventory"
+			},
+			"columnDelimiter": ",",
+			"rowDelimiter": "\n",
+			"escapeChar": "\\",
+			"firstRowAsHeader": false,
+			"quoteChar": "\""
+		},
+		"schema": [
+			{
+				"name": "Part No",
+				"type": "String"
+			},
+			{
+				"name": "3_Month_Forecast_XGBoost",
+				"type": "String"
+			},
+			{
+				"name": "3_Month_Forecast_SARIMA",
+				"type": "String"
+			},
+			{
+				"name": "3_Month_Forecast_HW",
+				"type": "String"
+			}
+		]
+	},
+	"type": "Microsoft.DataFactory/factories/datasets"
+}
