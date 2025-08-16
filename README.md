@@ -35,7 +35,7 @@ Tata Motors, a leader in the automotive sector, operates within a complex supply
 |`preprocessed_data/`                                | Contains the segmented data and pivot data
 | `notebooks/`                                       | Jupyter/DB notebooks for analysis, EDA, and modeling            |
 | `scripts/`                                         | SQL scripts for Snowflake warehousing layers             |
-| `images/architecture/`                             | Project architecture and flow diagrams                             |
+| `architecture/`                             | Project architecture and flow diagrams                             |
 | `final_report/BA11_Capstone1-Project-Final-Report.docx` | Final project report with background, methodology, and results |
 | `proposal/BA_Capstone-Project-Proposal.docx`       | Project proposal document                                          |
 | `ppt/BA11_Capstone1-Project_Final-PPT.pptx`        | Final capstone presentation                                        |
