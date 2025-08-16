@@ -1,0 +1,9 @@
+{
+	"name": "inventoryfactoryv1",
+	"location": "eastus",
+	"identity": {
+		"type": "SystemAssigned",
+		"principalId": "fac34db9-ff55-43f0-b324-ea3b2f4852d5",
+		"tenantId": "14feacef-82d1-4b66-b7ff-49a7fdd0b6c5"
+	}
+}
