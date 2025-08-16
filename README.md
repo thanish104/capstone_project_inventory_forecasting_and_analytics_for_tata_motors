@@ -1,0 +1,2 @@
+# capstone_project_inventory_forecasting_and_analytics_for_tata_motors
+Capstone project repo
