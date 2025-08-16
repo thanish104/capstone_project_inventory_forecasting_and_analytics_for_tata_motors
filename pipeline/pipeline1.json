@@ -1,0 +1,147 @@
+{
+	"name": "pipeline1",
+	"properties": {
+		"activities": [
+			{
+				"name": "Lookup1",
+				"type": "Lookup",
+				"dependsOn": [
+					{
+						"activity": "Start Audit Log",
+						"dependencyConditions": [
+							"Succeeded"
+						]
+					}
+				],
+				"policy": {
+					"timeout": "0.12:00:00",
+					"retry": 0,
+					"retryIntervalInSeconds": 30,
+					"secureOutput": false,
+					"secureInput": false
+				},
+				"userProperties": [],
+				"typeProperties": {
+					"source": {
+						"type": "AzureSqlSource",
+						"queryTimeout": "02:00:00",
+						"partitionOption": "None"
+					},
+					"dataset": {
+						"referenceName": "AzureSqlTable",
+						"type": "DatasetReference",
+						"parameters": {
+							"schema_name": "metadata",
+							"table_name": "audit_log"
+						}
+					},
+					"firstRowOnly": false
+				}
+			},
+			{
+				"name": "Start Audit Log",
+				"type": "Script",
+				"dependsOn": [],
+				"policy": {
+					"timeout": "0.12:00:00",
+					"retry": 0,
+					"retryIntervalInSeconds": 30,
+					"secureOutput": false,
+					"secureInput": false
+				},
+				"userProperties": [],
+				"linkedServiceName": {
+					"referenceName": "AzureSqlDatabase",
+					"type": "LinkedServiceReference"
+				},
+				"typeProperties": {
+					"scripts": [
+						{
+							"type": "Query",
+							"text": {
+								"value": "INSERT INTO METADATA.AUDIT_LOG (MOMENT, DURATION, PIPELINE_ID, PIPELINE_NAME, MESSAGE, PIPELINE_STATUS)  \nVALUES (SYSDATETIME(), null, '@{pipeline().RunId}', '@{pipeline().Pipeline}', '@{pipeline().Pipeline} pipeline is being executed.', 'START');",
+								"type": "Expression"
+							}
+						}
+					],
+					"scriptBlockExecutionTimeout": "02:00:00"
+				}
+			},
+			{
+				"name": "Finish Audit Log",
+				"type": "Script",
+				"dependsOn": [
+					{
+						"activity": "Lookup1",
+						"dependencyConditions": [
+							"Succeeded"
+						]
+					}
+				],
+				"policy": {
+					"timeout": "0.12:00:00",
+					"retry": 0,
+					"retryIntervalInSeconds": 30,
+					"secureOutput": false,
+					"secureInput": false
+				},
+				"userProperties": [],
+				"linkedServiceName": {
+					"referenceName": "AzureSqlDatabase",
+					"type": "LinkedServiceReference"
+				},
+				"typeProperties": {
+					"scripts": [
+						{
+							"type": "Query",
+							"text": {
+								"value": "DECLARE @StartTime DATETIME2(7), @Duration VARCHAR(50);\n\n-- Fetch the MOMENT value from the last 'START' entry for the same PIPELINE_ID\nSELECT TOP 1 @StartTime = MOMENT\nFROM METADATA.AUDIT_LOG\nWHERE PIPELINE_ID = '@{pipeline().RunId}'\nAND PIPELINE_STATUS = 'START'\nORDER BY MOMENT DESC;\n\n-- Calculate the duration if a matching 'START' entry exists\nIF @StartTime IS NOT NULL\nBEGIN\n    SET @Duration = CONVERT(VARCHAR(50), DATEDIFF(SECOND, @StartTime, SYSDATETIME())) + ' seconds';\nEND\nELSE\nBEGIN\n    SET @Duration = 'Unknown'; -- Fallback in case no START entry is found\nEND\n\n-- Insert the new 'FINISH' entry with calculated duration\nINSERT INTO METADATA.AUDIT_LOG (MOMENT, DURATION, PIPELINE_ID, PIPELINE_NAME, MESSAGE, PIPELINE_STATUS)\nVALUES (SYSDATETIME(), @Duration, '@{pipeline().RunId}', '@{pipeline().Pipeline}', '@{pipeline().Pipeline} pipeline execution successfully finished.', 'FINISH');",
+								"type": "Expression"
+							}
+						}
+					],
+					"scriptBlockExecutionTimeout": "02:00:00"
+				}
+			},
+			{
+				"name": "Lookup1_copy1",
+				"type": "Lookup",
+				"dependsOn": [
+					{
+						"activity": "Finish Audit Log",
+						"dependencyConditions": [
+							"Succeeded"
+						]
+					}
+				],
+				"policy": {
+					"timeout": "0.12:00:00",
+					"retry": 0,
+					"retryIntervalInSeconds": 30,
+					"secureOutput": false,
+					"secureInput": false
+				},
+				"userProperties": [],
+				"typeProperties": {
+					"source": {
+						"type": "AzureSqlSource",
+						"queryTimeout": "02:00:00",
+						"partitionOption": "None"
+					},
+					"dataset": {
+						"referenceName": "AzureSqlTable",
+						"type": "DatasetReference",
+						"parameters": {
+							"schema_name": "metadata",
+							"table_name": "audit_log"
+						}
+					},
+					"firstRowOnly": false
+				}
+			}
+		],
+		"annotations": [],
+		"lastPublishTime": "2025-08-02T10:49:05Z"
+	},
+	"type": "Microsoft.DataFactory/factories/pipelines"
+}

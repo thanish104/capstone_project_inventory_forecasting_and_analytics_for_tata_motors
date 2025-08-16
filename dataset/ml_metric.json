@@ -1,0 +1,30 @@
+{
+	"name": "ml_metric",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "Snowflake_temp1",
+			"type": "LinkedServiceReference"
+		},
+		"annotations": [],
+		"type": "SnowflakeV2Table",
+		"schema": [
+			{
+				"name": "MAE",
+				"type": "VARCHAR"
+			},
+			{
+				"name": "R_SQUARED",
+				"type": "VARCHAR"
+			},
+			{
+				"name": "RMSE",
+				"type": "VARCHAR"
+			}
+		],
+		"typeProperties": {
+			"schema": "ML_FORECAST",
+			"table": "PERFORMANCE_METRIC"
+		}
+	},
+	"type": "Microsoft.DataFactory/factories/datasets"
+}
